@@ -1,0 +1,38 @@
+body {
+    background-color: white;
+}
+
+#searchButton {
+    color: rgb(47, 47, 47);
+    height: 40px;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}
+
+.center-search {
+    text-align: center;
+}
+
+.center-search input {
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    margin: 10px;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}
+
+.container-row {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100px;
+    /* Set your desired width */
+    height: 100px;
+    /* Set your desired height */
+    margin: 0 10px;
+    /* Set the horizontal margin between containers */
+
+}
