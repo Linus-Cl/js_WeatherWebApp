@@ -3,6 +3,8 @@ let weatherLocation = 'LA';
 let locationLon;
 let locationLat;
 
+//test
+
 function getLocation() {
     let locationInput = document.getElementById("locationInput").value;
     locationInput ? weatherLocation = locationInput : weatherLocation = 'LA';
