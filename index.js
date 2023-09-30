@@ -1,44 +1,68 @@
 
-let weatherLocation = 'LA';
-let locationLon;
-let locationLat;
+//execute all needed functions after one another
+function userAction() {
+    getLocation()
+        .then((inputLocation) => apiGeoAction(inputLocation))
+        .then((choords) => apiAction(choords), (err) => apiAction(err))
+        .then((myJson) => displayData(myJson), (err) => { return; })
 
-//test
+}
 
+//get Input from User, default to LA
 function getLocation() {
-    let locationInput = document.getElementById("locationInput").value;
-    locationInput ? weatherLocation = locationInput : weatherLocation = 'LA';
-    apiGeoAction();
+    return new Promise((resolve) => {
+        let locationInput = document.getElementById("locationInput").value;
+        if (locationInput) {
+            resolve(locationInput);
+        } else {
+            resolve('LA');
+        }
+    });
 }
 
-const apiGeoAction = async () => {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${weatherLocation}&limit=1&appid=934979b42195471b298821ab34f14fc8`);
-    const myJson = await response.json();
-    try {
+//call api to get latitude and longitude of desired location if location exists
+const apiGeoAction = async (inputLocation) => {
+    return new Promise(async (resolve, reject) => {
+        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputLocation}&limit=1&appid=934979b42195471b298821ab34f14fc8`);
+        const myJson = await response.json();
+        try {
 
-        locationLat = myJson[0].lat;
-        console.log(locationLat);
-        locationLon = myJson[0].lon;
-        console.log(locationLon);
-    }
-    catch (ex) {
-        console.log(`exception: ${ex}`);
-        alert('Location not found');
-        return;
-    }
+            let locationLat = myJson[0].lat;
+            console.log(locationLat);
+            let locationLon = myJson[0].lon;
+            console.log(locationLon);
 
-    apiAction();
+            resolve([locationLat, locationLon]);
+        }
+        catch (ex) {
+            console.log(`exception: ${ex}`);
+            alert('Location not found');
+            reject(null);
+        }
+    })
 
 }
 
-const apiAction = async () => {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${locationLat}&lon=${locationLon}&appid=934979b42195471b298821ab34f14fc8`);
-    const myJson = await response.json();
-    //console.log(myJson);
-    displayData(myJson.name, Math.round(myJson.main.temp - 273.15));
+//call api to get location weather data
+const apiAction = async (choords) => {
+    return new Promise(async (resolve, reject) => {
+        if (choords === null) {
+            console.log('no choords');
+            reject(null);
+        }
+        else {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${choords[0]}&lon=${choords[1]}&appid=934979b42195471b298821ab34f14fc8`);
+            const myJson = await response.json();
+            resolve(myJson);
+        }
+
+    })
 }
 
-function displayData(givenLocation, temp) {
+//display the retrieved data
+function displayData(myJson) {
+    givenLocation = myJson.name;
+    temp = Math.round(myJson.main.temp - 273.15);
     document.getElementById('locationOut').textContent = givenLocation;
     document.getElementById('tempOut').textContent = temp + ' degrees Celsius';
 }
