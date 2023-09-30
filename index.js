@@ -1,4 +1,12 @@
 
+//click searchbutton with Enter
+let inputField = document.getElementById("locationInput");
+inputField.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        document.getElementById("searchButton").click();
+    }
+})
+
 //execute all needed functions after one another
 function userAction() {
     getLocation()
