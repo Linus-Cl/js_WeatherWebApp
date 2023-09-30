@@ -72,5 +72,5 @@ function displayData(myJson) {
     givenLocation = myJson.name;
     temp = Math.round(myJson.main.temp - 273.15);
     document.getElementById('locationOut').textContent = givenLocation;
-    document.getElementById('tempOut').textContent = temp + ' degrees Celsius';
+    document.getElementById('tempOut').textContent = temp + '°C';
 }
