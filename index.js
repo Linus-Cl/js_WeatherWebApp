@@ -78,15 +78,15 @@ function displayData(myJson) {
     let windSpeed = myJson.wind.speed;
     let rain;
     try {
-        rain = myJson["rain"]["1h"];
+        rain = myJson["rain"]["1h"] + ' mm';
     } catch {
         rain = 'None';
     }
     document.getElementById('locationOut').textContent = givenLocation;
-    document.getElementById('tempOut').textContent = temp + '°C';
+    document.getElementById('tempOut').textContent = temp + ' °C';
     document.getElementById('rainOut').textContent = rain;
     document.getElementById('visibilityOut').textContent = visibility + ' km';
-    document.getElementById('cloudsOut').textContent = clouds + '%';
-    document.getElementById('windspeedOut').textContent = windSpeed + 'm/s';
+    document.getElementById('cloudsOut').textContent = clouds + ' %';
+    document.getElementById('windspeedOut').textContent = windSpeed + ' m/s';
 
 }
