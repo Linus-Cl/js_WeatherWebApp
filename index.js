@@ -61,6 +61,7 @@ const apiAction = async (choords) => {
         else {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${choords[0]}&lon=${choords[1]}&appid=934979b42195471b298821ab34f14fc8`);
             const myJson = await response.json();
+            console.log(myJson);
             resolve(myJson);
         }
 
@@ -69,8 +70,23 @@ const apiAction = async (choords) => {
 
 //display the retrieved data
 function displayData(myJson) {
-    givenLocation = myJson.name;
-    temp = Math.round(myJson.main.temp - 273.15);
+
+    let givenLocation = myJson.name;
+    let temp = Math.round(myJson.main.temp - 273.15);
+    let visibility = myJson.visibility / 1000;
+    let clouds = myJson.clouds.all;
+    let windSpeed = myJson.wind.speed;
+    let rain;
+    try {
+        rain = myJson["rain"]["1h"];
+    } catch {
+        rain = 'None';
+    }
     document.getElementById('locationOut').textContent = givenLocation;
     document.getElementById('tempOut').textContent = temp + '°C';
+    document.getElementById('rainOut').textContent = rain;
+    document.getElementById('visibilityOut').textContent = visibility + ' km';
+    document.getElementById('cloudsOut').textContent = clouds + '%';
+    document.getElementById('windspeedOut').textContent = windSpeed + 'm/s';
+
 }
