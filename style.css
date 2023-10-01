@@ -11,6 +11,7 @@ body {
 
 .center-search {
     text-align: center;
+    margin-top: 20vh;
 }
 
 .center-search input {
@@ -25,14 +26,17 @@ body {
 .container-row {
     display: flex;
     justify-content: center;
+    margin-top: 30vh;
 }
 
 .container {
-    width: 100px;
+    width: 130px;
     /* Set your desired width */
     height: 100px;
     /* Set your desired height */
     margin: 0 10px;
     /* Set the horizontal margin between containers */
+    background-color: rgb(244, 244, 244);
+    text-align: center;
 
 }
