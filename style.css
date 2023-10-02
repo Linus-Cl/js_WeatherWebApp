@@ -24,6 +24,15 @@ h1 {
 
 }
 
+hr {
+    color: yellowgreen;
+    top: 50vh;
+    margin-top: 110px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 60vw;
+}
+
 #searchButton {
     color: rgb(47, 47, 47);
     height: 60px;
@@ -49,7 +58,7 @@ h1 {
 .container-row {
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 5vh;
 }
 
 .container {
