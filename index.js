@@ -1,5 +1,5 @@
 
-//click searchbutton with Enter
+//click searchbutton with enter
 let inputField = document.getElementById("locationInput");
 inputField.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
